@@ -1,29 +1,34 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+const Home = () => import("../views/Home.vue");
+const About = () => import("../views/About.vue");
+const ArticleDetail = () => import("../views/ArticleDetail.vue");
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
+const routes = [{
+    path: "/",
+    name: "Home",
     component: Home
   },
+  // Aboutページは作りませんが、vue-routerを入れたときに作られていたのでそのままにしています。
+  // 必要に応じて設定してください。
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: "/about",
+    name: "About",
+    component: About
+  },
+  {
+    path: "/articles/:id",
+    name: "article-detail",
+    component: ArticleDetail
   }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;
